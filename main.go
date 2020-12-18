@@ -51,6 +51,7 @@ func handleRequests(){
 }
 
 func main(){
+	// add water as ingredient
 	ingredients = append(ingredients, Item{
 		UID : "0",
 		Name : "Water",
@@ -66,14 +67,14 @@ func main(){
 	})
 	// add another ingredient
 	ingredients = append(ingredients, Item{
-		UID : "1",
+		UID : "2",
 		Name : "Barley",
 		Desc : "Many brewers see barley as beer's soul. Barley has distinctive characteristics that make it a favored ingredient over other grains.",
 		Quantity : 20,
 	})
 	// add another ingredient
 	ingredients = append(ingredients, Item{
-		UID : "1",
+		UID : "3",
 		Name : "Yeast",
 		Desc : "Before it begins to reproduce and provide the beer with alcohol, yeast requires sugar to digest and oxygen to breathe.",
 		Quantity : 10,
