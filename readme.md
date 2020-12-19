@@ -1,4 +1,5 @@
 # Go REST API for Beer Ingredients
+Add ingredients to create your favourite beer! The rest-API supports GET, POST, and DELETE requests.
 
 ## Testing
 
