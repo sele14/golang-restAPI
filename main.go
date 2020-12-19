@@ -1,10 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
-	"encoding/json"
 	"github.com/gorilla/mux"
 )
 
@@ -15,7 +15,7 @@ import (
 // Create the different fields we expect for our beer ingredients
 
 type Ingredient struct {
-	UID string `json:"UID"`
+	ID string `json:"ID"`
 	Name string `json:"Name"`
 	Desc string `json:"Desc"`
 	Quantity int `"json:"Quantity"`
@@ -27,7 +27,7 @@ var ingredients []Ingredient
 
 func root(w http.ResponseWriter, r *http.Request){
 	// Fprintf prints the string to the writer object, not to console (it will show in the browser)
-	fmt.Fprintf(w, "Endpoint called: root()")
+	fmt.Fprintf(w, "Hello, you are at: root()")
 }
 
 func getIngredients(w http.ResponseWriter, r *http.Request){
@@ -59,17 +59,17 @@ func deleteIngredients(w http.ResponseWriter, r *http.Request){
 	// Get params from read stream
 	params := mux.Vars(r)
 
-	// pass the UID into the delete function
-	deleteByUID(params["uid"])
+	// pass the ID into the delete function
+	deleteByID(params["id"])
 
 	json.NewEncoder(w).Encode(ingredients)
 }
 
-func deleteByUID(uid string){
+func deleteByID(id string){
 	// iterate by ingredient list
 	for index, ingredient := range ingredients {
-		// if UID matches; delete
-		if ingredient.UID == uid {
+		// if ID matches; delete
+		if ingredient.ID == id {
 			ingredients = append(ingredients[:index], ingredients[index+1:]...)
 			break
 		}
@@ -86,7 +86,7 @@ func makeRequests(){
 	// create get/post/delete requests to interact with the API
 	router.HandleFunc("/ingredients", getIngredients).Methods("GET")
 	router.HandleFunc("/ingredients", addIngredients).Methods("POST")
-	router.HandleFunc("/ingredients/{uid}", deleteIngredients).Methods("DELETE")
+	router.HandleFunc("/ingredients/{id}", deleteIngredients).Methods("DELETE")
 
 	log.Fatal(http.ListenAndServe(":8000", router))
 }
@@ -94,28 +94,28 @@ func makeRequests(){
 func main(){
 	// add water as ingredient
 	ingredients = append(ingredients, Ingredient{
-		UID : "0",
+		ID : "0",
 		Name : "Water",
 		Desc : "Water is the largest volume ingredient in beer, and has a significant impact on the end product.",
 		Quantity : 50,
 	})
 	// add another ingredient
 	ingredients = append(ingredients, Ingredient{
-		UID : "1",
+		ID : "1",
 		Name : "Hops",
 		Desc : "Hops are responsible for producing aromas, some flavors and bitterness.",
 		Quantity : 20,
 	})
 	// some more sample ingredients--can be added with Postman calls
 	// ingredients = append(ingredients, Ingredient{
-	// 	UID : "2",
+	// 	ID : "2",
 	// 	Name : "Barley",
 	// 	Desc : "Many brewers see barley as beer's soul. Barley has distinctive characteristics that make it a favored ingredient over other grains.",
 	// 	Quantity : 20,
 	// })
 	// // add another ingredient
 	// ingredients = append(ingredients, Ingredient{
-	// 	UID : "3",
+	// 	ID : "3",
 	// 	Name : "Yeast",
 	// 	Desc : "Before it begins to reproduce and provide the beer with alcohol, yeast requires sugar to digest and oxygen to breathe.",
 	// 	Quantity : 10,
