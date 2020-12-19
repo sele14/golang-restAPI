@@ -10,7 +10,7 @@ import (
 
 // GOAL:
 // an API that stores the ingredients for beer--e.g. an inventory for a beer factory.
-
+// Allows for post, get, and delete requests of beer ingredients.
 
 // Create the different fields we expect for our beer ingredients
 
@@ -52,6 +52,7 @@ func addIngredients(w http.ResponseWriter, r *http.Request){
 	// Encode the data and return it back, so user can verify stored data
 	json.NewEncoder(w).Encode(ingredient)
 }
+
 func deleteIngredients(w http.ResponseWriter, r *http.Request){
 	w.Header().Set("Content-Type", "application/json")
 
@@ -105,7 +106,7 @@ func main(){
 		Desc : "Hops are responsible for producing aromas, some flavors and bitterness.",
 		Quantity : 20,
 	})
-	// some more sample ingredients;
+	// some more sample ingredients--can be added with Postman calls
 	// ingredients = append(ingredients, Ingredient{
 	// 	UID : "2",
 	// 	Name : "Barley",
