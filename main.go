@@ -39,13 +39,19 @@ func getIngredients(w http.ResponseWriter, r *http.Request){
 	json.NewEncoder(w).Encode(ingredients)
 }
 
-func handleRequests(){
+func addIngredients(w http.ResponseWriter, r *http.Request){
+
+}
+
+func makeRequests(){
 	// create router with short var (auto type, dont have to declare type) 
 	router := mux.NewRouter().StrictSlash(true)
 	// Create a GET request
 	router.HandleFunc("/", homePage).Methods("GET")
 	// another rout to look at the ingredients
 	router.HandleFunc("/ingredients", getIngredients).Methods("GET")
+	// post request to add ingredients
+	router.HandleFunc("/ingredients", addIngredients).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(":8000", router))
 }
