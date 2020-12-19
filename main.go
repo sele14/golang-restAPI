@@ -12,13 +12,16 @@ import (
 // an API that stores the ingredients for beer--e.g. an inventory for a beer factory.
 // Allows for post, get, and delete requests of beer ingredients.
 
-// Create the different fields we expect for our beer ingredients
+// (Note: This is file is more highly commented than usual for my own benefit.)
+
+// Create the different fields we expect for our beer ingredients (struct)
+// The struct is our 'model' of our data (similar to a class)
 
 type Ingredient struct {
-	ID string `json:"ID"`
-	Name string `json:"Name"`
-	Desc string `json:"Desc"`
-	Quantity int `"json:"Quantity"`
+	ID string `json:"id"`
+	Name string `json:"name"`
+	Desc string `json:"desc"`
+	Quantity int `"json:"quantity"`
 }
 
 // declare the ingredients var
