@@ -25,9 +25,9 @@ type Ingredient struct {
 
 var ingredients []Ingredient
 
-func homePage(w http.ResponseWriter, r *http.Request){
+func root(w http.ResponseWriter, r *http.Request){
 	// Fprintf prints the string to the writer object, not to console (it will show in the browser)
-	fmt.Fprintf(w, "Endpoint called: homePage()")
+	fmt.Fprintf(w, "Endpoint called: root()")
 }
 
 func getIngredients(w http.ResponseWriter, r *http.Request){
@@ -53,23 +53,40 @@ func addIngredients(w http.ResponseWriter, r *http.Request){
 	json.NewEncoder(w).Encode(ingredient)
 }
 
-// func deleteIngredients(w http.ResponseWriter, r *http.Request){
-// 	w.Header().Set("Content Type", "application/json")
-// 	params := mux.Vars(r)
+func deleteIngredients(w http.ResponseWriter, r *http.Request){
+	w.Header().Set("Content Type", "application/json")
 
-// 	_deleteIngredientUID(params["uid"])
+	// Get params from read stream
+	params := mux.Vars(r)
 
+	// pass the UID into the delete function
+	deleteByUID(params["uid"])
+
+	json.NewEncoder(w).Encode(ingredients)
+}
+
+func deleteByUID(uid string){
+	// iterate by ingredient list
+	for index, ingredient := range ingredients {
+		// if UID matches; delete
+		if ingredient.UID == uid {
+			ingredients = append(ingredients[:index], ingredients[index+1:]...)
+			break
+		}
+
+	}
+}
 
 func makeRequests(){
 	// create router with short var (auto type, dont have to declare type) 
 	router := mux.NewRouter().StrictSlash(true)
 	// Create a GET request
-	router.HandleFunc("/", homePage).Methods("GET")
+	router.HandleFunc("/", root).Methods("GET")
 
 	// create get/post/delete requests to interact with the API
 	router.HandleFunc("/ingredients", getIngredients).Methods("GET")
 	router.HandleFunc("/ingredients", addIngredients).Methods("POST")
-	// router.HandleFunc("/ingredients", deleteIngredients).Methods("DELETE")
+	router.HandleFunc("/ingredients", deleteIngredients).Methods("DELETE")
 
 	log.Fatal(http.ListenAndServe(":8000", router))
 }
