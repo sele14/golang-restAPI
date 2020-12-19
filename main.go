@@ -31,7 +31,7 @@ func root(w http.ResponseWriter, r *http.Request){
 }
 
 func getIngredients(w http.ResponseWriter, r *http.Request){
-	w.Header().Set("Content Type", "application/json")
+	w.Header().Set("Content-Type", "application/json")
 	// Println prints to the console, not browser
 	fmt.Println("Function Called: getIngredients()")
 
@@ -40,7 +40,7 @@ func getIngredients(w http.ResponseWriter, r *http.Request){
 }
 
 func addIngredients(w http.ResponseWriter, r *http.Request){
-	w.Header().Set("Content Type", "application/json")
+	w.Header().Set("Content-Type", "application/json")
 	var ingredient Ingredient
 	// Note to self: The _ used as var name tells the compiler to effectively discard
 	// the RHS value, but to type-check it and evaluate it if it has any side effects.
@@ -52,9 +52,8 @@ func addIngredients(w http.ResponseWriter, r *http.Request){
 	// Encode the data and return it back, so user can verify stored data
 	json.NewEncoder(w).Encode(ingredient)
 }
-
 func deleteIngredients(w http.ResponseWriter, r *http.Request){
-	w.Header().Set("Content Type", "application/json")
+	w.Header().Set("Content-Type", "application/json")
 
 	// Get params from read stream
 	params := mux.Vars(r)
@@ -86,7 +85,7 @@ func makeRequests(){
 	// create get/post/delete requests to interact with the API
 	router.HandleFunc("/ingredients", getIngredients).Methods("GET")
 	router.HandleFunc("/ingredients", addIngredients).Methods("POST")
-	router.HandleFunc("/ingredients", deleteIngredients).Methods("DELETE")
+	router.HandleFunc("/ingredients/{uid}", deleteIngredients).Methods("DELETE")
 
 	log.Fatal(http.ListenAndServe(":8000", router))
 }
