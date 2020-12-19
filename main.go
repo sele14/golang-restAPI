@@ -41,16 +41,16 @@ func getIngredients(w http.ResponseWriter, r *http.Request){
 
 func addIngredients(w http.ResponseWriter, r *http.Request){
 	w.Header().Set("Content Type", "application/json")
-	var Ingredient Ingredient
+	var ingredient Ingredient
 	// Note to self: The _ used as var name tells the compiler to effectively discard
 	// the RHS value, but to type-check it and evaluate it if it has any side effects.
-	_ = json.NewDecoder(r.Body).Decode(&ingredients)
+	_ = json.NewDecoder(r.Body).Decode(&ingredient)
 	// add to ingredients list
 	
 	// Store the data we add
-	ingredients = append(ingredients, ingredients)
+	ingredients = append(ingredients, ingredient)
 	// Encode the data and return it back, so user can verify stored data
-	json.NewEncoder(w).Encode(ingredients)
+	json.NewEncoder(w).Encode(ingredient)
 }
 
 // func deleteIngredients(w http.ResponseWriter, r *http.Request){
@@ -58,7 +58,6 @@ func addIngredients(w http.ResponseWriter, r *http.Request){
 // 	params := mux.Vars(r)
 
 // 	_deleteIngredientUID(params["uid"])
-// }
 
 
 func makeRequests(){
@@ -70,7 +69,7 @@ func makeRequests(){
 	// create get/post/delete requests to interact with the API
 	router.HandleFunc("/ingredients", getIngredients).Methods("GET")
 	router.HandleFunc("/ingredients", addIngredients).Methods("POST")
-	router.HandleFunc("/ingredients", deleteIngredients).Methods("DELETE")
+	// router.HandleFunc("/ingredients", deleteIngredients).Methods("DELETE")
 
 	log.Fatal(http.ListenAndServe(":8000", router))
 }
@@ -84,7 +83,7 @@ func main(){
 		Quantity : 50,
 	})
 	// add another ingredient
-	ingredients = append(ingredients, ingredients{
+	ingredients = append(ingredients, Ingredient{
 		UID : "1",
 		Name : "Hops",
 		Desc : "Hops are responsible for producing aromas, some flavors and bitterness.",
