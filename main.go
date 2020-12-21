@@ -13,6 +13,9 @@ import (
 // Allows for post, get, and delete requests of beer ingredients.
 
 // (Note: This is file is more highly commented than usual for my own benefit.)
+// ___________________________
+
+
 
 // Create the different fields we expect for our beer ingredients (struct)
 // The struct is our 'model' of our data (similar to a class)
@@ -44,11 +47,11 @@ func getIngredients(w http.ResponseWriter, r *http.Request){
 
 func addIngredients(w http.ResponseWriter, r *http.Request){
 	w.Header().Set("Content-Type", "application/json")
+	
 	var ingredient Ingredient
-	// Note to self: The _ used as var name tells the compiler to effectively discard
-	// the RHS value, but to type-check it and evaluate it if it has any side effects.
-	_ = json.NewDecoder(r.Body).Decode(&ingredient)
-	// add to ingredients list
+
+	// convert inputted data to object we can work with
+	json.NewDecoder(r.Body).Decode(&ingredient)
 	
 	// Store the data we add
 	ingredients = append(ingredients, ingredient)
