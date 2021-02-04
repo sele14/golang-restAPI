@@ -26,3 +26,7 @@ Use an API testing tool like Postman and send a ```POST``` request and add an in
 	"Quantity" : 1,
 }
 ```
+
+And check the new contents by doing a ```GET``` request to see the updates.
+
+Use the url http://127.0.0.1:8000/instruments.
