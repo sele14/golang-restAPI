@@ -19,7 +19,7 @@ Use an API testing tool like Postman or https://reqbin.com/ and send a POST requ
 
 ```json
 {
-	"ID" : "0",
+	"ID" : "3",
 	"Type" : "Cryptocurrency",
 	"Name" : "BTC",
 	"Price" : 27303.96,
