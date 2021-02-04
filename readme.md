@@ -15,7 +15,18 @@ go run main.go
 
 ## Testing
 
-Use an API testing tool like Postman or https://reqbin.com/ and send a POST request like adding another beer ingredient:
+Use an API testing tool like Postman or https://reqbin.com/ and send a POST request like adding instrument:
+
+```json
+{
+	"ID" : "0",
+	"Type" : "Cryptocurrency",
+	"Name" : "BTC",
+	"Price" : 27303.96,
+	"Quantity" : 1,
+}
+```
+
 
 ##  Input:
 
