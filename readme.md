@@ -15,7 +15,7 @@ go run main.go
 
 ## Testing
 
-Use an API testing tool like Postman or https://reqbin.com/ and send a POST request like adding instrument:
+Use an API testing tool like Postman and send a ```POST``` request and add an instrument like:
 
 ```json
 {
