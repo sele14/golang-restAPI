@@ -26,14 +26,3 @@ Use an API testing tool like Postman or https://reqbin.com/ and send a POST requ
 	"Quantity" : 1,
 }
 ```
-
-
-##  Input:
-
-```go
-	ID       string  `json:"id"`
-	Type     string  `json:"type"`
-	Name     string  `json:"name"`
-	Price    float32 `json:"price"`
-	Quantity int     `json:"quantity"`
-```
